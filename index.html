@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mining Training Certificaciones | Centro de Competencias Laborales</title>
+    <style>
+        :root {
+            --azul-principal: #094479;
+            --azul-oscuro: #0B2545;
+            --verde-logo: #76B82A;
+            --gris-fondo: rgba(255, 255, 255, 0.25);
+            --texto-oscuro: #004B93;
+        }
+
+        /* FONDO INDUSTRIAL */
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            color: var(--texto-oscuro);
+            background-image: linear-gradient(rgba(11, 37, 69, 0.55), rgba(0, 0, 0, 0.65)), url('imagenes/motoniveladora.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+        
+        /* Encabezado */
+        header { background: linear-gradient(135deg, rgba(140, 182, 233, 0.9) 0%, rgba(0, 75, 147, 0.9) 100%); color: white; padding: 25px 20px; text-align: center; border-bottom: 4px solid var(--verde-logo); }
+        
+        /* Diseño Logotipo */
+        .logo-container { display: flex; justify-content: center; align-items: center; margin-bottom: 15px; }
+        .logo-box { background: white; padding: 8px 25px; border-radius: 6px; display: flex; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .logo-texto-azul { font-size: 24px; font-weight: 900; color: #004B93; font-family: 'Arial Black', sans-serif; letter-spacing: -1px; }
+        .logo-texto-negro { font-size: 24px; font-weight: 900; color: #111111; font-family: 'Arial Black', sans-serif; letter-spacing: -1px; }
+        .logo-icono { font-size: 26px; margin: 0 8px; color: var(--verde-logo); font-weight: bold; }
+        .sub-logo-text { font-size: 1px; color: #555; font-weight: bold; letter-spacing: 4px; border-top: 1px solid #ccc; padding-top: 2px; margin-top: -3px; text-align: center; display: block; width: 100%; }
+
+        header p { margin: 5px 0 0 0; opacity: 0.9; font-size: 14px; font-weight: 300; }
+        .eslogan { display: inline-block; margin-top: 10px; background-color: rgba(255,255,255,0.15); padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; border-left: 3px solid var(--verde-logo); }
+
+        /* Barra de Navegación */
+        nav { background-color: rgba(17, 17, 17, 0.95); display: flex; justify-content: center; box-shadow: 0 4px 6px rgba(0,0,0,0.2); flex-wrap: wrap; }
+        nav a { color: white; padding: 15px 20px; text-decoration: none; font-weight: bold; cursor: pointer; transition: all 0.3s; font-size: 14px; }
+        nav a:hover, nav a.active { background-color: var(--azul-principal); border-bottom: 3px solid var(--verde-logo); }
+
+        /* Contenedores */
+        .container { max-width: 1050px; margin: 30px auto; padding: 30px; background: var(--gris-fondo); border-radius: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+                { 
+            max-width: 1050px; 
+            margin: 40px auto; /* <-- CAMBIA ESTO: El primer número (40px) empuja la caja hacia abajo separándola del menú */
+            padding: 30px; 
+            background: var(--gris-fondo); 
+            border-radius: 8px; 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3); 
+            backdrop-filter: blur(4px); 
+            -webkit-backdrop-filter: blur(4px); 
+        }
+        .container 
+
+        /* Control de Pestañas CSS */
+        .tab-content { display: none; }
+
+        /* Estilos de Sectores y Diseño de Perfiles */
+        .sector-title { background: var(--azul-oscuro); color: white; padding: 12px 20px; font-size: 16px; font-weight: bold; border-radius: 5px 5px 0 0; margin-top: 25px; border-left: 5px solid var(--verde-logo); display: flex; justify-content: space-between; align-items: center; }
+        .subsector-container { background: #e2e8f0; border: 1px solid transparen; padding: 20px; border-radius: 0 0 5px 5px; margin-bottom: 15px; }
+        .subsector-title { font-size: 13px; font-weight: bold; color: var(--azul-principal); margin: 0 0 12px 0; padding-bottom: 5px; border-bottom: 1px dashed #CBD5E1; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        .perfiles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 10px; margin-bottom: 15px; }
+        .perfil-item { background: transparen; border: 1px solid #E2E8F0; padding: 12px; border-radius: 6px; font-size: 12px; font-weight: 600; display: flex; flex-direction: column; align-items: flex-start; box-shadow: 0 2px 4px rgba(0,0,0,0.01); color: #334155; }
+        .perfil-nombre { display: flex; align-items: center; width: 100%; font-weight: bold; color: #1e293b; text-align: left; }
+        .perfil-nombre::before { content: "✓"; color: var(--verde-logo); font-weight: bold; margin-right: 8px; font-size: 14px; }
+        .perfil-codigo { font-size: 10px; color: #64748b; margin-left: 20px; margin-top: 3px; background: #e2e8f0; padding: 1px 6px; border-radius: 4px; font-family: monospace; }
+
+        /* Grid Informativo */
+        .grid-dos-columnas { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px; }
+        .box-info { background: white; padding: 20px; border-radius: 6px; border-top: 3px solid var(--azul-principal); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .box-info h3 { color: var(--azul-principal); margin-top: 0; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
+                /* Configuración del contenedor del texto en movimiento */
+        .marquesina-contenedor {
+            width: 100%;
+            overflow: hidden; /* Oculta el texto que se sale de la pantalla */
+            white-space: nowrap; /* Evita que el texto salte de línea */
+            background-color: rgba(0, 0, 0, 0.4); /* Un fondo sutil para resaltar las letras */
+            padding: 7px 0;
+            margin-top: 12px;
+        }
+
+        /* Animación que mueve las letras */
+        .marquesina-texto {
+            display: inline-block;
+            padding-left: 100%; /* Empieza fuera de la pantalla a la derecha */
+            animation: moverTexto 30s linear infinite; /* 35s es la velocidad, infinite para que no pare */
+            font-size: 20px;
+            font-weight: bold;
+            color: #FFFFFF;
+        }
+
+        /* Definición del movimiento de derecha a izquierda */
+        @keyframes moverTexto {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    
+    </div>
+</div>
+        </div>
+    </div>
+    <!-- NUEVO TEXTO CON LOS COLORES DEL LOGO -->
+<div style="font-size: 35px; font-weight: 900; font-family: 'Arial Black', sans-serif; margin-top: 10px; letter-spacing: -0.5px;">
+    
+</
+div>
+
+    <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
+    <img src="imagenes/logo-mining.jpg" alt="Mining Training Certificaciones" style="height: 250px; width: auto; display: block;">
+</div>
+
+        <div class="marquesina-contenedor">
+        <div class="marquesina-texto">
+            Centro de Evaluación y Competencias Laborales Acreditado por ChileValora  - 
+            "Validando la Experiencia y el Oficio de los Trabajadores de Chile "
+        </div>
+    </div>
+</header>
+<nav>
+    <a onclick="cambiarVentana('inicio')" id="btn-inicio">Inicio</a>
+    <a onclick="cambiarVentana('perfiles')" id="btn-perfiles">Sectores y Perfiles</a>
+    <a onclick="cambiarVentana('evaluadores')" id="btn-evaluadores">Evalua con nosotros</a>
+<a href="#" onclick="cambiarVentana('contacto')" id="btn-contacto">Contactanos</a>
+
+<a href="https://chilevalora.cl" target="_blank" class="enlace-externo">Ir a ChileValora ↗</a>
+</nav>
+
+<!--CONTENEDOR PRINCIPAL DE CONTENIDOS-->
+<div class="container">
+    <!-- SECCIÓN DE BIENVENIDA / INICIO -->
+    <div id="inicio" class="tab-content">
+        <div class="box-info">
+            <h3>Bienvenidos al Centro de Competencias Laborales</h3>
+            <p>Somos un organismo acreditado por <strong>ChileValora</strong> dedicado a evaluar y certificar formalmente las aptitudes laborales del capital humano industrial.</p>
+        </div>
+        
+        <div class="grid-dos-columnas">
+            <div class="box-info">
+                <h3>¿Qué es la Certificación?</h3>
+                <p>Es el reconocimiento oficial del Estado que valida tus conocimientos prácticos y habilidades laborales, sin importar si los adquiriste con estudios o por años de experiencia empírica en faenas.</p>
+            </div>
+            <div class="box-info">
+                <h3>Grandes Ventajas</h3>
+                <p>✓ Mayor puntuación en procesos de acreditación minera.<br>
+                   ✓ Inclusión automática en el Registro Nacional de ChileValora.<br>
+                   ✓ Respaldo curricular directo para empresas contratistas.</p>
+            </div>
+                 
+            </div>
+        </div>
+
+        </div>
+    </div>
+    <!-- SECCIÓN DEL CATÁLOGO DE PERFILES -->
+    <div id="perfiles" class="tab-content" style="display: none;">
+    <!-- ENCABEZADO DEL CATÁLOGO -->
+    <h3 style="color: #FFFFFF; margin-top: 0; font-size: 20px; text-transform: uppercase; letter-spacing: 0.5px;">
+        Catálogo Oficial de Perfiles Acreditados
+    </h3>
+    <p style="font-size: 13px; margin-bottom: 25px; color: rgba(255, 255, 255, 0.85); font-weight: 300;">
+        Explore los sectores industriales habilitados para iniciar su evaluación de competencias:
+    </p>
+    <!-- ========================================== -->
+    <!-- SECTOR 1: TRANSPORTE Y LOGÍSTICA          -->
+    <!-- ========================================== -->
+    <div style="margin-bottom: 25px;">
+        <div class="sector-title" style="display: flex; justify-content: space-between; align-items: center; background: var(--azul-oscuro); color: white; padding: 12px 20px; font-size: 14px; font-weight: bold; border-radius: 5px 5px 0 0; border-left: 5px solid var(--verde-logo);">
+            <span>Sector: Transporte y Logística</span>
+            <span style="font-size: 11px; opacity: 0.8; font-weight: normal; background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 10px;">1 Perfil</span>
+        </div>
+        
+        <div class="subsector-container" style="background: transparent; border: 1px solid rgba(255, 255, 255, 0.15); padding: 20px; border-radius: 0 0 5px 5px;">
+            <div class="subsector-title" style="font-size: 12px; font-weight: bold; color: var(--verde-logo); margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 0.5px;">
+                Subsector: Logística
+            </div>
+            
+            <!-- LISTA DE PERFILES -->
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+                <li style="background: rgba(11, 37, 69, 0.45); border-left: 3px solid var(--azul-principal); padding: 12px 18px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <span style="color: #FFFFFF; font-size: 13px; font-weight: 600; display: flex; align-items: center;">
+                        <span style="color: var(--verde-logo); margin-right: 10px;">✓</span> Operador(a) de Grúa
+                    </span>
+                    <span style="font-size: 10px; color: #FFFFFF; background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 4px; font-family: monospace;">P-0400-8111-008 V03</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- ========================================== -->
+    <!-- SECTOR 2: MINERÍA METÁLICA                -->
+    <!-- ========================================== -->
+    <div style="margin-bottom: 25px;">
+        <div class="sector-title" style="display: flex; justify-content: space-between; align-items: center; background: var(--azul-oscuro); color: white; padding: 12px 20px; font-size: 14px; font-weight: bold; border-radius: 5px 5px 0 0; border-left: 5px solid var(--verde-logo);">
+            <span>Sector: Minería Metálica</span>
+            <span style="font-size: 11px; opacity: 0.8; font-weight: normal; background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 10px;">15 Perfiles</span>
+        </div>
+        
+        <div class="subsector-container" style="background: transparent; border: 1px solid rgba(255, 255, 255, 0.15); padding: 20px; border-radius: 0 0 5px 5px;">
+            <div class="subsector-title" style="font-size: 12px; font-weight: bold; color: var(--verde-logo); margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 0.5px;">
+                Subsector: Minería del Cobre
+            </div>
+            
+            <!-- LISTA DE PERFILES -->
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+                
+                <li style="background: rgba(11, 37, 69, 0.45); border-left: 3px solid var(--azul-principal); padding: 12px 18px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <span style="color: #FFFFFF; font-size: 13px; font-weight: 600; display: flex; align-items: center;">
+                        <span style="color: var(--verde-logo); margin-right: 10px;">✓</span> Conductor(a) Transportista de Carga General en Faena Minera
+                    </span>
+                    <span style="font-size: 10px; color: #FFFFFF; background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 4px; font-family: monospace;">P-0400-8332-001 V04</span>
+                </li>
+
+                <li style="background: rgba(11, 37, 69, 0.45); border-left: 3px solid var(--azul-principal); padding: 12px 18px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <span style="color: #FFFFFF; font-size: 13px; font-weight: 600; display: flex; align-items: center;">
+                        <span style="color: var(--verde-logo); margin-right: 10px;">✓</span> Conductor(a) Transportista de Sustancias Peligrosas en Faena Minera
+                    </span>
+                    <span style="font-size: 10px; color: #FFFFFF; background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 4px; font-family: monospace;">P-4290-8343-001 V02</span>
+                </li>
+
+                <li style="background: rgba(11, 37, 69, 0.45); border-left: 3px solid var(--azul-principal); padding: 12px 18px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <span style="color: #FFFFFF; font-size: 13px; font-weight: 600; display: flex; align-items: center;">
+                        <span style="color: var(--verde-logo); margin-right: 10px;">✓</span> Operador(a) de Camión Aljibe
+                    </span>
+                    <span style="font-size: 10px; color: #FFFFFF; background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 4px; font-family: monospace;">P-0400-8111-011 V02</span>
+                </li>
+
+                <li style="background: rgba(11, 37, 69, 0.45); border-left: 3px solid var(--azul-principal); padding: 12px 18px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <span style="color: #FFFFFF; font-size: 13px; font-weight: 600; display: flex; align-items: center;">
+                        <span style="color: var(--verde-logo); margin-right: 10px;">✓</span> Operador(a) de Camión Cama Baja
+                    </span>
+                    <span style="font-size: 10px; color: #FFFFFF; background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 4px; font-family: monospace;">P-0400-8332-002 V04</span>
+                </li>
+
+                <li style="background: rgba(11, 37, 69, 0.45); border-left: 3px solid var(--azul-principal); padding: 12px 18px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <span style="color: #FFFFFF; font-size: 13px; font-weight: 600; display: flex; align-items: center;">
+                        <span style="color: var(--verde-logo); margin-right: 10px;">✓</span> Operador(a) de Cargador Frontal
+                    </span>
+                    <span style="font-size: 10px; color: #FFFFFF; background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 4px; font-family: monospace;">P-0400-8332-005 V01</span>
+                </li>
+
+                <li style="background: rgba(11, 37, 69, 0.45); border-left: 3px solid var(--azul-principal); padding: 12px 18px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <span style="color: #FFFFFF; font-size: 13px; font-weight: 600; display: flex; align-items: center;">
+                        <span style="color: var(--verde-logo); margin-right: 10px;">✓</span> Operador(a) de Motoniveladora
+                    </span>
+                    <span style="font-size: 10px; color: #FFFFFF; background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 4px; font-family: monospace;">P-0400-8342-004 V03</span>
+                </li>
+
+                <li style="background: rgba(11, 37, 69, 0.45); border-left: 3px solid var(--azul-principal); padding: 12px 18px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <span style="color: #FFFFFF; font-size: 13px; font-weight: 600; display: flex; align-items: center;">
+                        <span style="color: var(--verde-logo); margin-right: 10px;">✓</span> Operador(a) de Perforación Subterránea
+                    </span>
+                    <span style="font-size: 10px; color: #FFFFFF; background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 4px; font-family: monospace;">P-0400-8342-007 V01</span>
+                </li>
+                <li style="background: rgba(11, 37, 69, 0.45); border-left: 3px solid var(--azul-principal); padding: 12px 18px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <span style="color: #FFFFFF; font-size: 13px; font-weight: 600; display: flex; align-items: center;">
+                        <span style="color: var(--verde-logo); margin-right: 10px;">✓</span> Rigger en Alta
+                    </span>
+                    <span style="font-size: 10px; color: #FFFFFF; background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 4px; font-family: monospace;">P-0400-7542-006 V01</span>
+                </li>
+           <!-- ========================================== -->
+    <!-- SECTOR 3: CONSTRUCCIÓN                     -->
+    <!-- ========================================== -->
+    <div style="margin-bottom: 25px;">
+        <div class="sector-title" style="display: flex; justify-content: space-between; align-items: center; background: var(--azul-oscuro); color: white; padding: 12px 20px; font-size: 14px; font-weight: bold; border-radius: 5px 5px 0 0; border-left: 5px solid var(--verde-logo);">
+            <span>Sector: Construcción</span>
+            <span style="font-size: 11px; opacity: 0.8; font-weight: normal; background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 10px;">3 Perfiles</span>
+        </div>
+                <!-- CONTENEDOR GENERAL DE SUBSECTORES -->
+        <div class="subsector-container" style="background: transparent; border: 1px solid rgba(255, 255, 255, 0.15); padding: 20px; border-radius: 0 0 5px 5px; display: flex; flex-direction: column; gap: 20px;">
+            
+            <!-- SUBSECTOR 1: MONTAJE INDUSTRIAL -->
+            <div>
+                <div class="subsector-title" style="font-size: 12px; font-weight: bold; color: var(--verde-logo); margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Subsector: Montaje Industrial
+                </div>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+                    <li style="background: rgba(11, 37, 69, 0.45); border-left: 3px solid var(--azul-principal); padding: 12px 18px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <span style="color: #FFFFFF; font-size: 13px; font-weight: 600; display: flex; align-items: center;">
+                            <span style="color: var(--verde-logo); margin-right: 10px;">✓</span> Operador(a) Retroexcavadora
+                        </span>
+                        <span style="font-size: 10px; color: #FFFFFF; background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 4px; font-family: monospace;">P-0400-7233-012 V02</span>
+                    </li>
+                    <li style="background: rgba(11, 37, 69, 0.45); border-left: 3px solid var(--azul-principal); padding: 12px 18px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <span style="color: #FFFFFF; font-size: 13px; font-weight: 600; display: flex; align-items: center;">
+                            <span style="color: var(--verde-logo); margin-right: 10px;">✓</span> Operador(a) de Grúa Terreno Agreste RT
+                        </span>
+                        <span style="font-size: 10px; color: #FFFFFF; background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 4px; font-family: monospace;">P-4312-8342-002 V01</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- SUBSECTOR 2: OBRAS DE INGENIERÍA CIVIL -->
+            <div style="border-top: 1px dashed rgba(255, 255, 255, 0.15); padding-top: 15px;">
+                <div class="subsector-title" style="font-size: 12px; font-weight: bold; color: var(--verde-logo); margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Subsector: Obras de Ingeniería Civil
+                </div>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+                    <li style="background: rgba(11, 37, 69, 0.45); border-left: 3px solid var(--azul-principal); padding: 12px 18px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <span style="color: #FFFFFF; font-size: 13px; font-weight: 600; display: flex; align-items: center;">
+                            <span style="color: var(--verde-logo); margin-right: 10px;">✓</span> Operador(a) Camión Pluma
+                        </span>
+                        <span style="font-size: 10px; color: #FFFFFF; background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 4px; font-family: monospace;">P-0400-8113-001 V02</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+<div id="evaluadores" class="tab-content">
+    <div class="box-info" style="max-width: 650px; margin: 0 auto; padding: 35px;">
+        <h3 style="color: var(--azul-principal); font-size: 22px; margin-bottom: 15px;">Formulario de Postulación de Evaluadores</h3>
+        <p style="color: #487cc4; font-size: 18px; margin-bottom: 35px;">Si eres evaluador acreditado o deseas calificar para nuestro equipo técnico, ingresa tus datos a continuación:</p>
+        
+        <form onsubmit="alert('Datos enviados con éxito. Nuestro equipo técnico se contactará a la brevedad.'); return false;">
+            <div class="form-group">
+                <label for="nombre">Nombre Completo:</label>
+                <input type="text" id="nombre" placeholder="Ej: Juan Pérez Muñoz" required>
+            </div>
+            <div class="grid-dos-columnas" style="margin-top: 0; gap: 15px; margin-bottom: 15px;">
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label for="rut">RUT:</label>
+                    <input type="text" id="rut" placeholder="12.345.678-k" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label for="telefono">Teléfono de Contacto:</label>
+                    <input type="tel" id="telefono" placeholder="+56 9 1234 5678" required>
+                </div>
+            <div class="form-group">
+                <label for="correo">Correo Electrónico:</label>
+                <input type="email" id="correo" placeholder="ejemplo@miningtraining.cl" required>
+            </div>
+            <div class="form-group">
+                <label for="sector-exp">Sector Principal de Experiencia:</label>
+                <select id="sector-exp" required>
+                    <option value="" disabled selected>Seleccione un área...</option>
+                    <option value="mineria">Minería Metálica (Cobre)</option>
+                    <option value="logistica">Transporte y Logística</option>
+                    <option value="construccion">Construcción y Obras Civiles</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="mensaje">Breve Resumen de Experiencia o Comentarios:</label>
+                <textarea id="mensaje" rows="4" placeholder="Indique sus años de experiencia en faena, acreditaciones vigentes de ChileValora o equipos que domina..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Enviar Mis Datos de Evaluador</button>
+        </form>
+    </div>
+</div>
+</div> <!-- FIN DEL CONTAINER PRINCIPAL -->
+    <!-- CONTENEDOR PRINCIPAL ÚNICO -->
+<div class="container">
+    <!-- PESTAÑA: INICIO -->
+    <div id="inicio" class="tab-content active">
+        <div class="box-info">
+            <h3>Bienvenidos al Centro de Competencias Laborales</h3>
+            <p>Somos un organismo acreditado por <strong>ChileValora</strong> para evaluar y certificar las aptitudes de los trabajadores en los sectores más exigentes del país.</p>
+            <p>Nuestras certificaciones validan tus conocimientos y trayectoria laboral, impulsando tu empleabilidad y desarrollo en la industria minera, logística y de construcción.</p>
+        </div>
+                <div class="grid-dos-columnas">
+            <div class="box-info">
+                <h3>¿Por qué certificarse?</h3>
+                <p>✓ Reconocimiento oficial del Estado.<br>
+                   ✓ Aumento de valor en el mercado laboral.<br>
+                   ✓ Inclusión en el Registro Nacional de Personas Certificadas.</p>
+            </div>
+            <div class="box-info">
+                <h3>Requisitos Básicos</h3>
+                <p>• Cédula de identidad vigente.<br>
+                   • Experiencia demostrable en el perfil a evaluar.<br>
+                   • ClaveÚnica para postulaciones digitales.</p>
+            </div>
+        </div>
+    </div>
+    <!-- PESTAÑA: SECTORES Y PERFILES (LISTADO COMPLETO) -->
+    <div id="perfiles" class="tab-content">
+        <h3 style="color: var(--azul-principal); margin-top: 0; font-size: 20px;">Sectores y Perfiles Laborales Acreditados</h3>
+        <p style="font-size: 14px; margin-bottom: 20px; color: #475569;">Selecciona tu perfil de competencias para iniciar tu proceso de evaluación oficial.</p>
+        <!-- SECTOR: TRANSPORTE Y LOGÍSTICA -->
+        <div class="sector-title">
+            <span>Sector: Transporte y Logística</span>
+            <span style="font-size: 11px; opacity: 0.8; font-weight: normal;">1 Perfil</span>
+        </div>
+        <div class="subsector-container">
+            <div class="subsector-title">Subsector: Logística</div>
+            <div class="perfiles-grid">
+                <div class="perfil-item">
+                    <div class="perfil-nombre">Operador(a) de Grúa</div>
+                    <div class="perfil-codigo">P-0400-8111-008 V03</div>
+                </div>
+            </div>
+        </div>
+        <!-- SECTOR: MINERÍA METÁLICA -->
+        <div class="sector-title">
+            <span>Sector: Minería Metálica</span>
+            <span style="font-size: 11px; opacity: 0.8; font-weight: normal;">15 Perfiles</span>
+        </div>
+        <div class="subsector-container">
+            <div class="subsector-title">Subsector: Minería del Cobre</div>
+            <div class="perfiles-grid">
+                <div class="perfil-item">
+                    <div class="perfil-nombre">Conductor(a) Transportista de Carga General en Faena Minera</div>
+                    <div class="perfil-codigo">P-0400-8332-001 V04</div>
+                </div>
+                <div class="perfil-item">
+                    <div class="perfil-nombre">Conductor(a) Transportista de Sustancias Peligrosas en Faena Minera</div>
+                    <div class="perfil-codigo">P-4290-8343-001 V02</div>
+                </div>
+                <div class="perfil-item">
+                    <div class="perfil-nombre">Operador(a) de Camión Aljibe</div>
+                    <div class="perfil-codigo">P-0400-8111-011 V02</div>
+                </div>
+                <div class="perfil-item">
+                    <div class="perfil-nombre">Operador(a) de Camión Cama Baja</div>
+                    <div class="perfil-codigo">P-0400-8332-002 V04</div>
+                </div>
+                <div class="perfil-item">
+                    <div class="perfil-nombre">Operador(a) de Cargador Frontal</div>
+                    <div class="perfil-codigo">P-0400-8332-005 V01</div>
+                </div>
+                <div class="perfil-item">
+                    <div class="perfil-nombre">Operador(a) de Motoniveladora</div>
+                    <div class="perfil-codigo">P-0400-8342-004 V03</div>
+                </div>
+                <div class="perfil-item">
+                    <div class="perfil-nombre">Operador(a) de Perforación Subterránea</div>
+                    <div class="perfil-codigo">P-0400-8342-007 V01</div>
+                </div>
+                <div class="perfil-item">
+                    <div class="perfil-nombre">Rigger en Alta</div>
+                    <div class="perfil-codigo">P-0400-7542-006 V01</div>
+                </div>
+                <div class="perfil-item">
+                    <div class="perfil-nombre">Rigger en Media</div>
+                    <div class="perfil-codigo">P-0400-8343-002 V03</div>
+                </div>
+                <div class="perfil-item">
+                    <div class="perfil-nombre">Rigger en Baja</div>
+                    <div class="perfil-codigo">P-0400-8111-028 V01</div>
+                </div>
+                <div class="perfil-item">
+                    <div class="perfil-nombre">Operador(a) Grúa Telescópica de Mediana Minería</div>
+                    <div class="perfil-codigo">P-3320-7215-003 V01</div>
+                </div>
+                <div class="perfil-item">
+                    <div class="perfil-nombre">Operador(a) de Excavadora</div>
+                    <div class="perfil-codigo">P-3320-7215-001 V01</div>
+                </div>
+                <div class="perfil-item">
+                    <div class="perfil-nombre">Operador(a) de Tractor sobre Oruga</div>
+                    <div class="perfil-codigo">P-3320-7215-002 V01</div>
+                </div>
+                <div class="perfil-item">
+                    <div class="perfil-nombre">Operador(a) LHD Mina Subterránea</div>
+                    <div class="perfil-codigo">P-4390-8343-002 V01</div>
+                </div>
+                <div class="perfil-item">
+                    <div class="perfil-nombre">Operador(a) Carguío Subterráneo en Proceso de Tronadura</div>
+                    <div class="perfil-codigo">P-0400-8343-004 V01</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTOR: CONSTRUCCIÓN -->
+        <div class="sector-title">
+            <span>Sector: Construcción</span>
+            <span style="font-size: 11px; opacity: 0.8; font-weight: normal;">3 Perfiles</span>
+        </div>
+        <div class="subsector-container" style="margin-bottom: 0; border-bottom: none; border-radius: 0;">
+            <div class="subsector-title">Subsector: Montaje Industrial</div>
+            <div class="perfiles-grid">
+                <div class="perfil-item">
+                    <div class="perfil-nombre">Operador(a) Retroexcavadora</div>
+                    <div class="perfil-codigo">P-0400-7233-012 V02</div>
+                </div>
+                <div class="perfil-item">
+                    <div class="perfil-nombre">Operador(a) de Grúa Terreno Agreste RT</div>
+                    <div class="perfil-codigo">P-4312-8342-002 V01</div>
+                </div>
+            </div>
+        </div>
+        <div class="subsector-container" style="border-top: none; border-radius: 0 0 5px 5px;">
+            <div class="subsector-title">Subsector: Obras de Ingeniería Civil</div>
+            <div class="perfiles-grid">
+                <div class="perfil-item">
+                    <div class="perfil-nombre">Operador(a) Camión Pluma</div>
+                    <div class="perfil-codigo">P-0400-8113-001 V02</div>
+                </div>
+            </div>
+        </div>
+         <!-- SECCIÓN DE CONTACTO (Ahora sí quedará bien indexada y separada) -->
+    <div id="contacto" class="tab-content"> style="display: none;">
+        <div style="background: rgba(11, 37, 69, 0.65); border-left: 5px solid var(--verde-logo); padding: 25px; margin-top: 20px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+            <div style="flex: 1; min-width: 280px;">
+                <h4 style="color: var(--verde-logo); margin: 0 0 8px 0; font-size: 16px; font-weight: bold; text-transform: uppercase;">¿Eres una empresa contratista?</h4>
+                <p style="color: #FFFFFF; margin: 0; font-size: 13px; opacity: 0.95; line-height: 1.5;">Atendemos solicitudes corporativas, evaluaciones masivas en terreno para operadores y gestión a través de la franquicia tributaria SENCE.</p>
+            </div>
+            <div>
+                <a href="mailto:contacto@miningtrainingcertificaciones.com" style="display: inline-block; color: #0B2545; background-color: var(--verde-logo); text-decoration: none; padding: 12px 26px; border-radius: 5px; font-size: 13px; font-weight: bold; text-transform: uppercase;">Cotizar Proceso</a>
+            </div>
+        </div>
+    </div>
+</div> <!-- CIERRE DEL CONTAINER -->
+    <!-- =================================================== -->
+    <!-- CONTROLADOR INTERACTIVO JAVASCRIPT                  -->
+    <!-- =================================================== -->
+    <script>
+        function cambiarVentana(idPestana) {
+            // 1. Ocultar todos los bloques de contenido
+            const contenidos = document.querySelectorAll('.tab-content');
+            contenidos.forEach(content => {
+                content.style.display = 'none';
+            });
+
+            // 2. Desactivar todos los botones del menú de navegación
+            const enlaces = document.querySelectorAll('nav a');
+            enlaces.forEach(enlace => {
+                enlace.classList.remove('active');
+            });
+
+            // 3. Obtener y mostrar el contenedor de destino
+            const pestanaActiva = document.getElementById(idPestana);
+            if (pestanaActiva) {
+                pestanaActiva.style.display = 'block';
+            } else {
+                console.error("No se encontró ninguna pestaña con el ID: " + idPestana);
+            }
+
+            // 4. Activar visualmente el botón cliqueado
+            const botonActivo = document.getElementById("btn-" + idPestana);
+            if (botonActivo) {
+                botonActivo.classList.add('active');
+            }
+        }
+
+        // Inicialización por defecto al cargar la página
+        document.addEventListener("DOMContentLoaded", function() {
+            cambiarVentana('inicio');
+        });
+    </script>
+    <!-- =================================================== -->
+    <!-- PIE DE PÁGINA (FOOTER)                              -->
+    <!-- =================================================== -->
+    <footer style="background-color: rgba(11, 37, 69, 0.95); color: white; text-align: center; padding: 35px 20px; margin-top: 40px; border-top: 4px solid var(--verde-logo); font-size: 14px;">
+        <p style="font-weight: bold; letter-spacing: 1px; color: var(--verde-logo); margin: 0 0 5px 0; text-transform: uppercase;">
+            Certificamos competencias, impulsamos futuro
+        </p>
+        <p style="margin: 0; opacity: 0.7; font-size: 12px;">
+            &copy; 2026 Mining Training Certificaciones. Todos los derechos reservados.
+        </p>
+    </footer>
+
+</body>
+</html>
+
