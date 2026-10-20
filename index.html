@@ -79,8 +79,14 @@
 <body>
 
     <header>
-        <div class="logo-txt">MINING <span>▲</span> TRAINING</div>
-        <div class="sub-txt">Capacitaciones OTEC</div>
+       <!-- Busca la etiqueta <header> y actualiza la sección del logo así: -->
+
+    <div class="nav-container">
+        <!-- Reemplazo del texto por tu imagen corporativa -->
+        <a href="#inicio">
+            <img src="imagenes/logo-mining-otec.png" alt="Logo Mining Training" class="logo-img">
+        </a>
+     </div>
     </header>
 
     <!-- MENÚ DE NAVEGACIÓN EXTENDIDO CON BOTÓN SENCE -->
@@ -174,7 +180,64 @@
             <h2 style="color: var(--azul-corporativo);">Actualidad y Boletín Informativo</h2>
             <p>Próximamente se publicarán aquí las últimas novedades del sector OTEC, fechas de postulación e hitos formativos relevantes.</p>
         </div>
-        <!DOCTYPE html>
+             <!-- Ventana: Cotiza con Nosotros (CÓDIGO CORREGIDO) -->
+    <section id="cotiza">
+        <h2>Cotiza con Nosotros</h2>
+        <p>Personalizamos nuestros programas según las necesidades específicas de su empresa. Complete el formulario y recibirá una propuesta técnica rápidamente.</p>
+        
+        <form action="#" method="POST">
+            <!-- Nombre de Empresa o Persona -->
+            <div style="margin-bottom: 15px; display: flex; flex-direction: column; gap: 5px;">
+                <label for="nombre_solicitante" style="font-weight: 600; color: #0b2545;">Nombre de la Empresa o Persona Natural:</label>
+                <input type="text" id="nombre_solicitante" name="nombre_solicitante" placeholder="Ej: Minera del Norte S.A. o Juan Pérez" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+
+            <!-- RUT -->
+            <div style="margin-bottom: 15px; display: flex; flex-direction: column; gap: 5px;">
+                <label for="rut" style="font-weight: 600; color: #0b2545;">RUT (Empresa o Persona Natural):</label>
+                <input type="text" id="rut" name="rut" placeholder="Ej: 12.345.678-9" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+
+            <!-- Dirección -->
+            <div style="margin-bottom: 15px; display: flex; flex-direction: column; gap: 5px;">
+                <label for="direccion" style="font-weight: 600; color: #0b2545;">Dirección:</label>
+                <input type="text" id="direccion" name="direccion" placeholder="Ej: Av. Apoquindo 1234, Santiago" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+
+            <!-- Teléfono de Contacto -->
+            <div style="margin-bottom: 15px; display: flex; flex-direction: column; gap: 5px;">
+                <label for="telefono" style="font-weight: 600; color: #0b2545;">Teléfono de Contacto:</label>
+                <input type="tel" id="telefono" name="telefono" placeholder="Ej: +56 9 1234 5678" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+
+            <!-- Curso a Solicitar -->
+            <div style="margin-bottom: 15px; display: flex; flex-direction: column; gap: 5px;">
+                <label for="curso-interes" style="font-weight: 600; color: #0b2545;">Curso a Solicitar:</label>
+                <select id="curso-interes" name="curso_interes" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    <option value="" disabled selected>Seleccione un curso...</option>
+                    <option value="mineria">Cursos Técnicos en Operación Minera</option>
+                    <option value="seguridad">Seguridad y Prevención de Riesgos Laborales</option>
+                    <option value="maquinaria">Manejo de Maquinaria Pesada y Tecnología Minera</option>
+                    <option value="liderazgo">Programas de Liderazgo y Gestión Minera</option>
+                    <option value="os10">Curso OS-10</option>
+                </select>
+            </div>
+            <!-- Modalidad -->
+            <div style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 5px;">
+                <label for="modalidad" style="font-weight: 600; color: #0b2545;">Modalidad de Capacitación:</label>
+                <select id="modalidad" name="modalidad" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    <option value="" disabled selected>Seleccione la modalidad...</option>
+                    <option value="presencial">Presencial</option>
+                    <option value="online_sincronico">E-learning Sincrónico</option>
+                    <option value="online_asincronico">E-learning asincrónico</option>
+                    <option value="hibrida">Modalidad Híbrida Simultánea (HyFlex)</option>
+                </select>
+            </div>
+
+            <!-- Botón de Envío -->
+            <button type="submit" style="background-color: #0b2545; color: white; padding: 12px; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; width: 100%;">Solicitar Cotización</button>
+        </form>
+    </section>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -254,5 +317,5 @@
 </head>
 <body>
 
-    <header>
+    
        
