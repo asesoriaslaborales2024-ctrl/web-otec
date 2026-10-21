@@ -259,36 +259,35 @@
             <p><strong>Correo:</strong> contacto@miningtrainingcapacitaciones.com</p>
             <p><strong>Sitio Web:</strong> ://miningtrainingcapacitaciones.com</p>
         </div>
-
-        <!-- 9. VENTANA: COTIZA CON NOSOTROS -->
+                     <!-- 9. VENTANA: COTIZA CON NOSOTROS -->
         <div id="cotiza" class="tab-content">
             <h2 style="color: var(--azul-corporativo);">Cotiza con Nosotros</h2>
             <p>Complete minuciosamente el formulario de requerimiento técnico para procesar el presupuesto de su capacitación.</p>
             
-            <form action="#" method="POST">
+            <form id="form-cotizacion" onsubmit="return false;">
                 <div class="form-group">
                     <label for="empresa_persona">Nombre Empresa o Persona Natural:</label>
-                    <input type="text" id="empresa_persona" name="empresa_persona" required placeholder="Ej: Minera del Norte S.A. o Juan Pérez">
+                    <input type="text" id="empresa_persona" required placeholder="Ej: Minera del Norte S.A. o Juan Pérez">
                 </div>
 
                 <div class="form-group">
                     <label for="rut_cliente">RUT:</label>
-                    <input type="text" id="rut_cliente" name="rut_cliente" required placeholder="Ej: 76.123.456-K o 15.678.912-3">
+                    <input type="text" id="rut_cliente" required placeholder="Ej: 76.123.456-K o 15.678.912-3">
                 </div>
 
                 <div class="form-group">
                     <label for="direccion_cliente">Dirección:</label>
-                    <input type="text" id="direccion_cliente" name="direccion_cliente" required placeholder="Ej: Av. Apoquindo 1420, Las Condes">
+                    <input type="text" id="direccion_cliente" required placeholder="Ej: Av. Apoquindo 1420, Las Condes">
                 </div>
 
                 <div class="form-group">
                     <label for="telefono_cliente">Teléfono de Contacto:</label>
-                    <input type="tel" id="telefono_cliente" name="telefono_cliente" required placeholder="Ej: +56 9 9876 5432">
+                    <input type="tel" id="telefono_cliente" required placeholder="Ej: +56 9 9876 5432">
                 </div>
 
                 <div class="form-group">
                     <label for="curso_solicitado">Curso a Solicitar:</label>
-                    <select id="curso_solicitado" name="curso_solicitado" required>
+                    <select id="curso_solicitado" required>
                         <option value="" disabled selected>-- Seleccione un Curso --</option>
                         <option value="maquinaria">Operación de Maquinaria Pesada</option>
                         <option value="seguridad">Seguridad y Prevención de Riesgos</option>
@@ -299,7 +298,7 @@
 
                 <div class="form-group">
                     <label for="modalidad_capacitacion">Modalidad:</label>
-                    <select id="modalidad_capacitacion" name="modalidad_capacitacion" required>
+                    <select id="modalidad_capacitacion" required>
                         <option value="" disabled selected>-- Seleccione la Modalidad --</option>
                         <option value="Presencial">Presencial</option>
                         <option value="Online E-learning Sincrónico">Online E-learning Sincrónico</option>
@@ -308,7 +307,9 @@
                     </select>
                 </div>
 
-                <button type="submit" class="btn-accion" style="margin-top: 10px; width: 100%;">Enviar Solicitud de Cotización</button>
+                <!-- type="button" obliga al navegador a no recargar ni dar error 405 -->
+                <button type="button" onclick="despacharCotizacion()" class="btn-accion" style="margin-top: 10px; width: 100%;">Enviar Solicitud por WhatsApp</button>
+                
             </form>
         </div>
 
@@ -344,7 +345,95 @@
             
             // Subir la pantalla suavemente al cambiar de ventana
             window.scrollTo({top: 0, behavior: 'smooth'});
+                
+               // FUNCIÓN ORIGINAL PARA CAMBIAR DE VENTANA
+        function irA(tabId) {
+            var contenidos = document.getElementsByClassName('tab-content');
+            for (var i = 0; i < contenidos.length; i++) {
+                contenidos[i].classList.remove('active');
+            }
+
+            var enlaces = document.querySelectorAll('nav a');
+            for (var j = 0; j < enlaces.length; j++) {
+                enlaces[j].classList.remove('active');
+            }
+
+            document.getElementById(tabId).classList.add('active');
+
+            var botonActivo = document.getElementById('nav-' + tabId);
+            if (botonActivo) {
+                botonActivo.classList.add('active');
+            }
+            
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
     </script>
+                     <script>
+        function despacharCotizacion() {
+            // Capturar las cajas de texto de forma local
+            var empresa = document.getElementById('empresa_persona').value.trim();
+            var rut = document.getElementById('rut_cliente').value.trim();
+            var direccion = document.getElementById('direccion_cliente').value.trim();
+            var telefono = document.getElementById('telefono_cliente').value.trim();
+            
+            var cursoSelect = document.getElementById('curso_solicitado');
+            var curso = cursoSelect.options[cursoSelect.selectedIndex].text;
+            
+            var modalidadSelect = document.getElementById('modalidad_capacitacion');
+            var modalidad = modalidadSelect.options[modalidadSelect.selectedIndex].text;
+
+            // Validar de forma manual que no manden las cajas en blanco
+            if (empresa === "" || rut === "" || direccion === "" || telefono === "" || cursoSelect.value === "" || modalidadSelect.value === "") {
+                alert("Por favor, rellene todos los campos antes de enviar su solicitud.");
+                return;
+            }
+
+            // Teléfono de destino corporativo sin signos ni espacios
+            var numeroCelular = "56939683714"; 
+
+            // Redacción codificada limpia para evitar rupturas de red en navegadores
+            var cuerpoMensaje = "*Nueva Solicitud de Cotización - Mining Training*%0A%0A" +
+                                "*Nombre/Empresa:* " + encodeURIComponent(empresa) + "%0A" +
+                                "*RUT:* " + encodeURIComponent(rut) + "%0A" +
+                                "*Dirección:* " + encodeURIComponent(direccion) + "%0A" +
+                                "*Teléfono:* " + encodeURIComponent(telefono) + "%0A" +
+                                "*Curso solicitado:* " + encodeURIComponent(curso) + "%0A" +
+                                "*Modalidad requerida:* " + encodeURIComponent(modalidad);
+
+            // Enlace Universal Oficial de WhatsApp sin errores de letras
+            var urlLimpia = "https://wa.me" + numeroCelular + "?text=" + cuerpoMensaje;
+            // Vaciar el formulario localmente antes de saltar de pantalla
+            document.getElementById('form-cotizacion').reset();
+
+            // Salto inmediato seguro en la misma pestaña
+            window.location.href = urlLimpia;
+        }
+
+        // SISTEMA DE CONTROL DE VENTANAS CORPORATIVAS
+        function irA(tabId) {
+            var contenidos = document.getElementsByClassName('tab-content');
+            for (var i = 0; i < contenidos.length; i++) {
+                contenidos[i].classList.remove('active');
+            }
+
+            var enlaces = document.querySelectorAll('nav a');
+            for (var j = 0; j < enlaces.length; j++) {
+                enlaces[j].classList.remove('active');
+            }
+
+            document.getElementById(tabId).classList.add('active');
+
+            var botonActivo = document.getElementById('nav-' + tabId);
+            if (botonActivo) {
+                botonActivo.classList.add('active');
+            }
+            
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    </script>
+
+
+
+   </script>
 </body>
 </html>
